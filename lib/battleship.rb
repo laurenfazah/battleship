@@ -21,13 +21,9 @@ class Battleship
   end
 
   def play_game
-#     Ships cannot wrap around the board
-# Ships cannot overlap
-# Ships can be laid either horizontally or vertically
-# Coordinates must correspond to the first and last units of the ship. (IE: You can’t place a two unit ship at “A1 A3”)
-
     # Board.lay_computer_ships
-
+    prompt_player_ship_placement
+    gets_player_ship_placement
   end
 
   def instructions
@@ -47,6 +43,10 @@ second is three units long."
     prompt += "The grid has A1 at the top left and D4 at the bottom right."
     prompt += "\n"
     prompt += "Enter the squares for the two-unit ship:"
+  end
+
+  def gets_player_ship_placement
+    #
   end
 end
 
