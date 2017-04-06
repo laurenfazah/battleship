@@ -67,5 +67,3 @@ second is three units long."
     board.place_ships(coords, board.player_board)
   end
 end
-
-# Battleship.new.run
