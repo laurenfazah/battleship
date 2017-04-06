@@ -1,9 +1,19 @@
+require './lib/board'
+require "pry"
+
 class Battleship
-  def run
-    welcome_message
-    # start_input = gets.chomp
-    # start_from_input(start_input)
+  attr_reader :board
+
+  def initialize
+    @board = nil
   end
+
+  def run
+    puts welcome_message
+    start_input = gets.chomp
+    start_from_input(start_input)
+  end
+
   def welcome_message
     message = "Welcome to BATTLESHIP"
     message += "Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
@@ -21,9 +31,12 @@ class Battleship
   end
 
   def play_game
-    # Board.lay_computer_ships
-    prompt_player_ship_placement
+    @board = Board.new
+    puts prompt_player_ship_placement
     gets_player_ship_placement
+    puts prompt_three_unit
+    gets_player_ship_placement
+    binding.pry
   end
 
   def instructions
@@ -45,9 +58,14 @@ second is three units long."
     prompt += "Enter the squares for the two-unit ship:"
   end
 
+  def prompt_three_unit
+    "Enter the squares for the three-unit ship:"
+  end
+
   def gets_player_ship_placement
-    #
+    coords = gets.chomp.upcase.split
+    board.place_ships(coords, board.player_board)
   end
 end
 
-Battleship.new.run
+# Battleship.new.run
