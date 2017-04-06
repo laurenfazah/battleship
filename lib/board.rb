@@ -1,9 +1,14 @@
 class Board
-  attr_reader :computer_board, :player_board
+  attr_accessor :computer_board,
+                :computer_placements,
+                :player_board,
+                :player_placements
 
   def initialize
     @computer_board = generate_computer_board
+    @computer_placements = [["A1", "A2"], ["B1", "B2", "B3"]]
     @player_board = base_grid
+    @player_placements = []
   end
 
   def generate_computer_board
@@ -42,7 +47,7 @@ class Board
   end
 
   def row_index_lookup
-    ["A","B","C","D"]
+    %W(A B C D)
   end
 
   def hit_or_miss(square)
@@ -114,5 +119,38 @@ class Board
     return false unless valid_horizontally?(placements) || valid_vertically?(placements)
     return false unless no_overlap?(placements, board)
     true
+  end
+
+  def aim_fire(coord, board)
+    # validate_shot
+    square = find_square(coord, board)
+    square[:guessed] = true
+    if square[:ship]
+      puts "Hit!"
+    else
+      puts "Miss!"
+    end
+  end
+
+  def check_game_over
+    [player_board, computer_board].each_with_index do |board, index|
+      case index
+      when 0
+        return true if player_placements.all? do |ship|
+          ship.all? do |coord|
+            square = find_square(coord, player_board)
+            square[:guessed] && square[:ship]
+          end
+        end
+      when 1
+        return true if computer_placements.all? do |ship|
+          ship.all? do |coord|
+            square = find_square(coord, computer_board)
+            square[:guessed] && square[:ship]
+          end
+        end
+      end
+    end
+    false
   end
 end

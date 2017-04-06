@@ -1,4 +1,4 @@
-require './test/test_helper.rb'
+require "./test/test_helper.rb"
 
 class BattleshipTest < Minitest::Test
   attr_reader :battleship, :instructions
@@ -48,5 +48,11 @@ second is three units long."
     prompt += "Enter the squares for the two-unit ship:"
 
     assert_equal prompt, battleship.prompt_player_ship_placement
+  end
+
+  def test_prompt_player_ship_shot
+    prompt = "Which position should we fire at?"
+
+    assert_equal prompt, battleship.prompt_player_shot
   end
 end

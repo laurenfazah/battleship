@@ -1,4 +1,4 @@
-require './test/test_helper'
+require "./test/test_helper"
 
 class BoardTest < Minitest::Test
   attr_reader :board, :base_grid
@@ -127,5 +127,23 @@ class BoardTest < Minitest::Test
 
     refute board.validate_placements(bad_1, board.player_board)
     refute board.validate_placements(bad_2, board.player_board)
+  end
+
+  def test_game_over
+    board = Board.new
+
+    board.computer_placements = [%W(A1 A2), %W(B2 C2 D2)]
+    board.player_placements = [%W(A3 A2), %W(B1 C1 D1)]
+
+    refute board.check_game_over
+
+    board.computer_board = [
+      [{:position=>"A1", :guessed=>true, :ship=>true}, {:position=>"A2", :guessed=>true, :ship=>true}, {:position=>"A3", :guessed=>false, :ship=>false}, {:position=>"A4", :guessed=>false, :ship=>false}],
+      [{:position=>"B1", :guessed=>false, :ship=>false}, {:position=>"B2", :guessed=>true, :ship=>true}, {:position=>"B3", :guessed=>false, :ship=>false}, {:position=>"B4", :guessed=>false, :ship=>false}],
+      [{:position=>"C1", :guessed=>false, :ship=>false}, {:position=>"C2", :guessed=>true, :ship=>true}, {:position=>"C3", :guessed=>false, :ship=>false}, {:position=>"C4", :guessed=>false, :ship=>false}],
+      [{:position=>"D1", :guessed=>false, :ship=>false}, {:position=>"D2", :guessed=>true, :ship=>true}, {:position=>"D3", :guessed=>false, :ship=>false}, {:position=>"D4", :guessed=>false, :ship=>false}]
+    ]
+
+    assert board.check_game_over
   end
 end
