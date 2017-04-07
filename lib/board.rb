@@ -12,6 +12,7 @@ class Board
     @computer_placements = [["A1", "A2"], ["B1", "B2", "B3"]]
     @player_board = base_grid
     @player_placements = []
+    @computer_shot_options = valid_coordinates
   end
 
   def generate_computer_board
@@ -72,15 +73,21 @@ class Board
     true
   end
 
-  def aim_fire(coord, board)
+  def aim_fire(coord, board, from)
     # validate_shot
     square = find_square(coord, board)
     square[:guessed] = true
     if square[:ship]
-      puts "Hit!"
+      puts "\n\n#{from} hit!\n\n"
     else
-      puts "Miss!"
+      puts "\n\n#{from} missed!\n\n"
     end
+  end
+
+  def computer_shot
+    coord = @computer_shot_options.shuffle.pop
+    aim_fire(coord, player_board, "Computer")
+    puts "Computer took aim at #{coord}."
   end
 
   def check_game_over

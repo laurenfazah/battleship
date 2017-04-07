@@ -53,7 +53,10 @@ second is three units long."
   end
 
   def test_prompt_player_ship_shot
-    prompt = "Which position should we fire at?"
+    prompt = ""
+    prompt += "\n\n+++++++++++++++++++++++++++++++++"
+    prompt += "\n\nWhich position should we fire at?\n\n"
+    prompt += "+++++++++++++++++++++++++++++++++\n\n"
 
     assert_equal prompt, battleship.prompt_player_shot
   end

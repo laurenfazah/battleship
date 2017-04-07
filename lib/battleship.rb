@@ -52,31 +52,32 @@ class Battleship
   end
 
   def shoot
-    # back and forth
     until game_over
       puts prompt_player_shot
       gets_player_shot
       puts board.print_board(board.computer_board)
       check_game_over_player
-      # puts board.computer_shot
-      # check_game_over_computer
+      puts board.computer_shot
+      check_game_over_computer
     end
   end
 
   def check_game_over_player
     if @game_over = board.check_game_over
       puts "You win!"
+      exit
     end
   end
 
   def check_game_over_computer
     if @game_over = board.check_game_over
       puts "Computer sunk your ships!"
+      exit
     end
   end
 
   def gets_player_shot
     coord = gets.chomp.upcase
-    board.aim_fire(coord, board.computer_board)
+    board.aim_fire(coord, board.computer_board, "You")
   end
 end

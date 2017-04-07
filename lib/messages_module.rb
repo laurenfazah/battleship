@@ -28,7 +28,10 @@ module Messages
   end
 
   def prompt_player_shot
-    "Which position should we fire at?"
+    prompt = ""
+    prompt += "\n\n+++++++++++++++++++++++++++++++++"
+    prompt += "\n\nWhich position should we fire at?\n\n"
+    prompt += "+++++++++++++++++++++++++++++++++\n\n"
   end
 
   def end_game
