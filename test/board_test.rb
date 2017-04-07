@@ -51,7 +51,6 @@ class BoardTest < Minitest::Test
   end
 
   def test_print_board_with_shots
-    board = Board.new
     coord = "A1"
     coord_2 = "D1"
 
@@ -72,7 +71,6 @@ class BoardTest < Minitest::Test
 
   def test_place_two_ships
     two_unit = ["A1", "A2"]
-    board = Board.new
 
     assert_equal base_grid, board.player_board
 
@@ -83,7 +81,6 @@ class BoardTest < Minitest::Test
 
   def test_place_three_ships
     three_unit = ["B1", "B2", "B3"]
-    board = Board.new
     assert_equal base_grid, board.player_board
 
     board.place_ships(three_unit, board.player_board)
@@ -108,7 +105,6 @@ class BoardTest < Minitest::Test
   end
 
   def test_no_overlap
-    board = Board.new
     two_unit = ["A1", "A2"]
     three_unit = ["B1", "B2", "B3"]
     bad_three_unit = ["A2", "B2", "C2"]
@@ -120,7 +116,6 @@ class BoardTest < Minitest::Test
   end
 
   def test_validate_placements
-    board = Board.new
 
     two_unit = ["A1", "A2"]
     three_unit = ["B1", "B2", "B3"]
@@ -138,7 +133,6 @@ class BoardTest < Minitest::Test
   end
 
   def test_aim_fire
-    board = Board.new
     coord = "A1"
     square = board.find_square(coord, board.computer_board)
 
@@ -150,7 +144,6 @@ class BoardTest < Minitest::Test
   end
 
   def test_computer_shot
-    board = Board.new
     board.computer_shot_options = board.valid_coordinates
 
     assert_equal 16, board.computer_shot_options.count
@@ -165,7 +158,6 @@ class BoardTest < Minitest::Test
   end
 
   def test_game_over
-    board = Board.new
 
     board.computer_placements = [%W(A1 A2), %W(B2 C2 D2)]
     board.player_placements = [%W(A3 A2), %W(B1 C1 D1)]
