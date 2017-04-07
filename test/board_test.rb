@@ -50,6 +50,26 @@ class BoardTest < Minitest::Test
     assert_equal printed_board, board.print_board(board.computer_board)
   end
 
+  def test_print_board_with_shots
+    board = Board.new
+    coord = "A1"
+    coord_2 = "D1"
+
+    board.aim_fire(coord, board.computer_board, "Player")
+    board.aim_fire(coord_2, board.computer_board, "Player")
+
+    printed_board = ""
+    printed_board += "===========\n"
+    printed_board += ". 1 2 3 4\n"
+    printed_board += "A H      \n"
+    printed_board += "B        \n"
+    printed_board += "C        \n"
+    printed_board += "D M      \n"
+    printed_board += "==========="
+
+    assert_equal printed_board, board.print_board(board.computer_board)
+  end
+
   def test_place_two_ships
     two_unit = ["A1", "A2"]
     board = Board.new
@@ -119,7 +139,7 @@ class BoardTest < Minitest::Test
 
   def test_aim_fire
     board = Board.new
-    coord = "D1"
+    coord = "A1"
     square = board.find_square(coord, board.computer_board)
 
     refute square[:guessed]
