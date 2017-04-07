@@ -4,7 +4,6 @@ require "pry"
 
 class Battleship
   include Messages
-
   attr_reader :board, :game_over
 
   def initialize
@@ -58,7 +57,21 @@ class Battleship
       puts prompt_player_shot
       gets_player_shot
       puts board.print_board(board.computer_board)
-      @game_over = board.check_game_over
+      check_game_over_player
+      # puts board.computer_shot
+      # check_game_over_computer
+    end
+  end
+
+  def check_game_over_player
+    if @game_over = board.check_game_over
+      puts "You win!"
+    end
+  end
+
+  def check_game_over_computer
+    if @game_over = board.check_game_over
+      puts "Computer sunk your ships!"
     end
   end
 

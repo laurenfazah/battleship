@@ -2,7 +2,6 @@ require './lib/messages_module'
 
 class Board
   include Messages
-
   attr_accessor :computer_board,
                 :computer_placements,
                 :player_board,
@@ -42,37 +41,6 @@ class Board
     printed_board += "==========="
   end
 
-  def print_row(row, letter)
-    square_stats = row.map do |square|
-      hit_or_miss(square)
-    end
-
-    "#{letter} #{square_stats.join(' ')}\n"
-  end
-
-  def row_index_lookup
-    %W(A B C D)
-  end
-
-  def hit_or_miss(square)
-    if square[:guessed] && square[:ship]
-      "H"
-    elsif square[:guessed]
-      "M"
-    else
-      " "
-    end
-  end
-
-  def base_grid
-    [
-      [{position: "A1", guessed: false, ship: false}, {position: "A2", guessed: false, ship: false}, {position: "A3", guessed: false, ship: false}, {position: "A4", guessed: false, ship: false}],
-      [{position: "B1", guessed: false, ship: false}, {position: "B2", guessed: false, ship: false}, {position: "B3", guessed: false, ship: false}, {position: "B4", guessed: false, ship: false}],
-      [{position: "C1", guessed: false, ship: false}, {position: "C2", guessed: false, ship: false}, {position: "C3", guessed: false, ship: false}, {position: "C4", guessed: false, ship: false}],
-      [{position: "D1", guessed: false, ship: false}, {position: "D2", guessed: false, ship: false}, {position: "D3", guessed: false, ship: false}, {position: "D4", guessed: false, ship: false}]
-    ]
-  end
-
   def valid_coordinates
     base_grid.flatten.map { |square| square[:position] }
   end
@@ -95,27 +63,6 @@ class Board
     return false unless nums.all? { |coord| coord == nums[0] }
     return false unless array_increments?(letters)
     true
-  end
-
-  def array_increments?(array)
-    sorted = array.sort
-    last = sorted[0]
-    sorted[1, sorted.count].each do |n|
-      return false if last.next != n
-      last = n
-    end
-    true
-  end
-
-  def no_overlap?(placements, board)
-    return true unless placements.any? do |coord|
-      find_square(coord, board)[:ship] == true
-    end
-  end
-
-  def find_square(coord, board)
-    row_index = row_index_lookup.index(coord.chars[0])
-    board[row_index][coord.chars[1].to_i-1]
   end
 
   def validate_placements(placements, board)
@@ -141,6 +88,51 @@ class Board
     false
   end
 
+  private
+
+  def print_row(row, letter)
+    square_stats = row.map do |square|
+      hit_or_miss(square)
+    end
+
+    "#{letter} #{square_stats.join(' ')}\n"
+  end
+
+  def row_index_lookup
+    %W(A B C D)
+  end
+
+  def hit_or_miss(square)
+    if square[:guessed] && square[:ship]
+      "H"
+    elsif square[:guessed]
+      "M"
+    else
+      " "
+    end
+  end
+
+  def array_increments?(array)
+    sorted = array.sort
+    last = sorted[0]
+    sorted[1, sorted.count].each do |n|
+      return false if last.next != n
+      last = n
+    end
+    true
+  end
+
+  def no_overlap?(placements, board)
+    return true unless placements.any? do |coord|
+      find_square(coord, board)[:ship] == true
+    end
+  end
+
+  def find_square(coord, board)
+    row_index = row_index_lookup.index(coord.chars[0])
+    board[row_index][coord.chars[1].to_i-1]
+  end
+
   def all_ships_hit?(placements, board)
     placements.all? do |full_ship_coords|
       full_ship_coords.all? do |coord|
@@ -152,5 +144,14 @@ class Board
   def ship_hit?(coord, board)
     square = find_square(coord, board)
     square[:guessed] && square[:ship]
+  end
+
+  def base_grid
+    [
+      [{position: "A1", guessed: false, ship: false}, {position: "A2", guessed: false, ship: false}, {position: "A3", guessed: false, ship: false}, {position: "A4", guessed: false, ship: false}],
+      [{position: "B1", guessed: false, ship: false}, {position: "B2", guessed: false, ship: false}, {position: "B3", guessed: false, ship: false}, {position: "B4", guessed: false, ship: false}],
+      [{position: "C1", guessed: false, ship: false}, {position: "C2", guessed: false, ship: false}, {position: "C3", guessed: false, ship: false}, {position: "C4", guessed: false, ship: false}],
+      [{position: "D1", guessed: false, ship: false}, {position: "D2", guessed: false, ship: false}, {position: "D3", guessed: false, ship: false}, {position: "D4", guessed: false, ship: false}]
+    ]
   end
 end

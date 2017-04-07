@@ -32,6 +32,6 @@ module Messages
   end
 
   def end_game
-    "Congrats on the win!"
+    "Game Over"
   end
 end

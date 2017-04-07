@@ -17,14 +17,6 @@ class BoardTest < Minitest::Test
     assert_instance_of Board, board
   end
 
-  def test_lay_comp_ships
-
-  end
-
-  def test_base_grid
-    assert_equal base_grid, board.base_grid
-  end
-
   def test_valid_coordinates
     valid_coords = ["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4"]
     assert_equal valid_coords, board.valid_coordinates
@@ -43,10 +35,6 @@ class BoardTest < Minitest::Test
 
   def test_player_board
     assert_instance_of Array, board.computer_board
-  end
-
-  def test_print_row
-    assert_equal "A        \n", board.print_row([{position: "A1"}, {position: "A2"}, {position: "A3"}, {position: "A4"}], "A")
   end
 
   def test_print_board
