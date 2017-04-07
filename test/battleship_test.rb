@@ -32,12 +32,14 @@ class BattleshipTest < Minitest::Test
   end
 
   def test_start_from_input_with_q
+    skip
     goodbye = "Goodbye!"
 
     assert_equal goodbye, battleship.start_from_input("q")
   end
 
   def test_prompt_player_ship_placement
+    skip
     prompt = ""
     prompt += "I have laid out my ships on the grid."
     prompt += "You now need to layout your two ships."

@@ -1,4 +1,8 @@
+require './lib/messages_module'
+
 class Board
+  include Messages
+
   attr_accessor :computer_board,
                 :computer_placements,
                 :player_board,
