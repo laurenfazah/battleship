@@ -1,4 +1,4 @@
-require './lib/messages_module'
+require './lib/messages'
 
 class Board
   include Messages
@@ -95,7 +95,7 @@ class Board
     return true if all_ships_hit?(player_placements, player_board) || all_ships_hit?(computer_placements, computer_board)
     false
   end
-  
+
   def find_square(coord, board)
     row_index = row_index_lookup.index(coord.chars[0])
     board[row_index][coord.chars[1].to_i-1]

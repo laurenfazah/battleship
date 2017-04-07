@@ -1,5 +1,5 @@
 require "./lib/board"
-require './lib/messages_module'
+require './lib/messages'
 require "pry"
 
 class Battleship
