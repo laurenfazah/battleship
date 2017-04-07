@@ -3,7 +3,7 @@ require './lib/messages_module'
 require "pry"
 
 class Battleship
-  include Messages
+  extend Messages
   attr_reader :board, :game_over
 
   def initialize
@@ -12,7 +12,7 @@ class Battleship
   end
 
   def run
-    puts welcome_message
+    puts Messages.welcome_message
     start_input = gets.chomp
     start_from_input(start_input)
   end
@@ -22,7 +22,7 @@ class Battleship
     when "p" || "play"
       play_game
     when "i" || "instructions"
-      instructions
+      Messages.instructions
     when "q" || "quit"
       puts quit
       exit
@@ -33,14 +33,14 @@ class Battleship
     @board = Board.new
     placement_sequence
     shoot
-    puts end_game
+    puts Messages.end_game
     exit
   end
 
   def placement_sequence
-    puts prompt_player_ship_placement
+    puts Messages.prompt_player_ship_placement
     two_unit = gets_player_ship_placement
-    puts prompt_three_unit
+    puts Messages.prompt_three_unit
     three_unit = gets_player_ship_placement
     puts board.print_board(board.computer_board)
     board.player_placements = [two_unit, three_unit]
@@ -53,7 +53,7 @@ class Battleship
 
   def shoot
     until game_over
-      puts prompt_player_shot
+      puts Messages.prompt_player_shot
       gets_player_shot
       puts board.print_board(board.computer_board)
       check_game_over_player
