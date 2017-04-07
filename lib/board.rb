@@ -137,24 +137,20 @@ class Board
   end
 
   def check_game_over
-    [player_board, computer_board].each_with_index do |board, index|
-      case index
-      when 0
-        return true if player_placements.all? do |ship|
-          ship.all? do |coord|
-            square = find_square(coord, player_board)
-            square[:guessed] && square[:ship]
-          end
-        end
-      when 1
-        return true if computer_placements.all? do |ship|
-          ship.all? do |coord|
-            square = find_square(coord, computer_board)
-            square[:guessed] && square[:ship]
-          end
-        end
+    return true if all_ships_hit?(player_placements, player_board) || all_ships_hit?(computer_placements, computer_board)
+    false
+  end
+
+  def all_ships_hit?(placements, board)
+    placements.all? do |full_ship_coords|
+      full_ship_coords.all? do |coord|
+        ship_hit?(coord, board)
       end
     end
-    false
+  end
+
+  def ship_hit?(coord, board)
+    square = find_square(coord, board)
+    square[:guessed] && square[:ship]
   end
 end
