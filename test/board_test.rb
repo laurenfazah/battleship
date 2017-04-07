@@ -117,6 +117,21 @@ class BoardTest < Minitest::Test
     refute board.validate_placements(bad_2, board.player_board)
   end
 
+  def test_computer_shot
+    board = Board.new
+    board.computer_shot_options = board.valid_coordinates
+
+    assert_equal 16, board.computer_shot_options.count
+
+    board.computer_shot
+
+    assert_equal 15, board.computer_shot_options.count
+
+    board.computer_shot
+
+    assert_equal 14, board.computer_shot_options.count
+  end
+
   def test_game_over
     board = Board.new
 

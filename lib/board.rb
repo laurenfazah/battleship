@@ -5,7 +5,8 @@ class Board
   attr_accessor :computer_board,
                 :computer_placements,
                 :player_board,
-                :player_placements
+                :player_placements,
+                :computer_shot_options
 
   def initialize
     @computer_board = generate_computer_board
@@ -85,7 +86,7 @@ class Board
   end
 
   def computer_shot
-    coord = @computer_shot_options.shuffle.pop
+    coord = @computer_shot_options.shuffle!.pop
     aim_fire(coord, player_board, "Computer")
     puts "Computer took aim at #{coord}."
   end
