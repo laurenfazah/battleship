@@ -6,4 +6,3 @@ require './lib/battleship'
 require './lib/board'
 
 require './lib/messages'
-require './lib/validations'
