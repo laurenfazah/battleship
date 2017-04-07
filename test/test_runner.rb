@@ -1,0 +1,5 @@
+require 'simplecov'
+SimpleCov.start
+
+require "./test/battleship_test"
+require "./test/board_test"

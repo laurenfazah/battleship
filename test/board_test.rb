@@ -117,6 +117,18 @@ class BoardTest < Minitest::Test
     refute board.validate_placements(bad_2, board.player_board)
   end
 
+  def test_aim_fire
+    board = Board.new
+    coord = "D1"
+    square = board.find_square(coord, board.computer_board)
+
+    refute square[:guessed]
+
+    board.aim_fire(coord, board.computer_board, "Player")
+
+    assert square[:guessed]
+  end
+
   def test_computer_shot
     board = Board.new
     board.computer_shot_options = board.valid_coordinates

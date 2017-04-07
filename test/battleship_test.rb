@@ -31,27 +31,6 @@ class BattleshipTest < Minitest::Test
     assert_equal instructions, battleship.start_from_input("i")
   end
 
-  def test_start_from_input_with_q
-    skip
-    goodbye = "Goodbye!"
-
-    assert_equal goodbye, battleship.start_from_input("q")
-  end
-
-  def test_prompt_player_ship_placement
-    skip
-    prompt = ""
-    prompt += "I have laid out my ships on the grid."
-    prompt += "You now need to layout your two ships."
-    prompt += "The first is two units long and the
-second is three units long."
-    prompt += "The grid has A1 at the top left and D4 at the bottom right."
-    prompt += "\n"
-    prompt += "Enter the squares for the two-unit ship:"
-
-    assert_equal prompt, battleship.prompt_player_ship_placement
-  end
-
   def test_prompt_player_ship_shot
     prompt = ""
     prompt += "\n\n+++++++++++++++++++++++++++++++++"
