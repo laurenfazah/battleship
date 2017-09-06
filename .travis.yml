@@ -1,1 +1,2 @@
 language: ruby
+script: ruby test/test_runner.rb
